@@ -1,25 +1,30 @@
 (ns moonhenge.core
-    (:require [infinitelives.pixi.canvas :as c]
-              [infinitelives.pixi.events :as e]
-              [infinitelives.pixi.resources :as r]
-              [infinitelives.pixi.texture :as t]
-              [infinitelives.pixi.sprite :as s]
-              [cljs.core.async :refer [<!]])
-    (:require-macros [cljs.core.async.macros :refer [go]]
-                     [infinitelives.pixi.macros :as m]))
+  (:require [moonhenge.assets :as assets]
+            [moonhenge.titlescreen :as titlescreen]
+            [infinitelives.pixi.canvas :as c]
+            [infinitelives.pixi.events :as e]
+            [infinitelives.pixi.resources :as r]
+            [infinitelives.pixi.texture :as t]
+            [infinitelives.pixi.sprite :as s]
+            [infinitelives.utils.math :as math]
+
+            [cljs.core.async :refer [<!]])
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [infinitelives.pixi.macros :as m]))
 
 (defonce canvas
-  (c/init {:layers [:bg :world :float :ui] :expand true :background 0x000000}))
+  (c/init {:layers [:bg :ui] :background 0x000000 :expand true}))
+
+
 
 (defonce main-thread
   (go
-    (<! (r/load-resources canvas :bg ["img/bunny.png"]))
+    (<! (r/load-resources canvas :ui ["img/sprites.png"]))
 
-    (t/set-texture! :rabbit (r/get-texture :bunny :nearest))
+    (t/load-sprite-sheet!
+     (r/get-texture :sprites :nearest)
+     assets/sprites-assets)
 
-    (m/with-sprite canvas :bg
-      [rabbit (s/make-sprite :rabbit)]
-      (loop [angle 0]
-        (s/set-rotation! rabbit angle)
-        (<! (e/next-frame))
-        (recur (+ 0.1 angle))))))
+    (<! (titlescreen/run canvas))
+
+    ))

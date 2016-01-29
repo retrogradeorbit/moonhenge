@@ -16,7 +16,27 @@
    :star-4
    {:pos [32 8]
     :size [8 8]}
-   
+
+   :star-5
+   {:pos [40 8]
+    :size [8 8]}
+
+   :star-6
+   {:pos [48 8]
+    :size [8 8]}
+
+   :press-any-key
+   {:pos [32 40]
+    :size [(- 110 32) 10]}
+
+   :press-any-key-shadow
+   {:pos [32 56]
+    :size [(- 110 32) 10]}
+
    :ship
    {:pos [2 24]
-    :size [8 8]}})
+    :size [8 8]}
+
+
+
+   })
