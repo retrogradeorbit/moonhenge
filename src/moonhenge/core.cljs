@@ -19,11 +19,15 @@
 
 (defonce main-thread
   (go
-    (<! (r/load-resources canvas :ui ["img/sprites.png"]))
+    (<! (r/load-resources canvas :ui ["img/sprites.png" "img/sprites-2.png"]))
 
     (t/load-sprite-sheet!
      (r/get-texture :sprites :nearest)
      assets/sprites-assets)
+
+    (t/load-sprite-sheet!
+     (r/get-texture :sprites-2 :nearest)
+     assets/sprites-2-assets)
 
     (<! (titlescreen/run canvas))
 
