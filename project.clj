@@ -35,7 +35,7 @@
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/moonhenge.js"
+                :compiler {:output-to "build/js/compiled/moonhenge.js"
                            :main moonhenge.core
                            :optimizations :advanced
                            :pretty-print false}}]}
