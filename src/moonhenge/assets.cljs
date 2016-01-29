@@ -15,4 +15,8 @@
 
    :star-4
    {:pos [32 8]
+    :size [8 8]}
+   
+   :ship
+   {:pos [2 24]
     :size [8 8]}})
