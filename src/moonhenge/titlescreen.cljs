@@ -42,7 +42,12 @@
          press-key
          (s/make-sprite :press-any-key :scale 2
                         :y press-any-key-y
-                        )]
+                        )
+         title-words
+         (s/make-sprite :title-words :scale 2
+                        :x 4
+                        :y -180)
+         ]
 
 
 

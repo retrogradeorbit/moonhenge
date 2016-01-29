@@ -33,10 +33,13 @@
    {:pos [32 56]
     :size [(- 110 32) 10]}
 
-   :ship
-   {:pos [2 24]
-    :size [8 8]}
-
-
-
    })
+
+(def sprites-2-assets
+  {:ship
+   {:pos [0 0]
+    :size [32 32]}
+
+   :title-words
+   {:pos [0 32]
+    :size [352 32]}})
