@@ -17,17 +17,35 @@
 (def frames [:bullet-1 :bullet-2 :bullet-3])
 (def anim-speed 3)
 
+(def bullets (atom {}))
+
+(defn remove! [bkey]
+  (swap! bullets dissoc bkey))
+
 (defn spawn [canvas layer pos heading speed live-for]
-  (let [update (-> (vec2/vec2 0 -1)
+  (let [update (-> (vec2/vec2 0 1)
                    (vec2/rotate heading)
-                   (vec2/scale speed))]
+                   (vec2/scale speed))
+        [x y] [(vec2/get-x pos) (vec2/get-y pos)]]
     (go
-      (log "fire!")
       (m/with-sprite canvas layer
-        [bullet (s/make-sprite (first frames) :scale 4 :rotation heading)]
-        (loop [n live-for
-               pos pos]
-          (s/set-pos! bullet pos)
-          (<! (e/next-frame))
-          (when (pos? n)
-            (recur (dec n) (vec2/add pos update))))))))
+        [bullet (s/make-sprite (first frames)
+                               :scale 4 :rotation (+ heading Math/PI)
+                               :x x :y y)]
+        (let [bkey (keyword (gensym))]
+          (swap! bullets assoc bkey bullet)
+
+          (loop [n live-for
+                 pos pos]
+            (s/set-pos! bullet pos)
+            (<! (e/next-frame))
+
+            (s/set-texture! bullet (frames (mod n (count frames))))
+
+            (when (and (pos? n) (@bullets bkey))
+              (recur (dec n) (vec2/add pos update)))
+
+            ;; bullet dies
+            (swap! bullets dissoc bkey)
+
+            ))))))

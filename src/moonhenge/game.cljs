@@ -2,6 +2,8 @@
   (:require [moonhenge.assets :as assets]
             [moonhenge.starfield :as starfield]
             [moonhenge.bullet :as bullet]
+            [moonhenge.enemy :as enemy]
+            [moonhenge.explosion :as explosion]
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
@@ -21,14 +23,14 @@
     :pos (vec2/zero)
     :vel (vec2/zero)
     :acc (vec2/zero)
-    :max-speed 0.05
-    :thrust 0.003
+    :max-speed 0.1
+    :thrust 0.006
     :drag 0.99
     :rotate-speed 0.08
 
     ;; bullets
-    :fire-delay 50
-    :bullet-speed 13
+    :fire-delay 5
+    :bullet-speed 20
     :bullet-life 50
     }))
 
@@ -49,39 +51,29 @@
    (events/is-pressed? :space)
    (events/is-pressed? :z)))
 
-(def explosion-frames [:explosion-0 :explosion-1 :explosion-2
-                       :explosion-3 :explosion-4 :explosion-5])
-
-(def explosion-speed 6)
-
-(defn explosion [canvas layer entity]
-  (go
-    (m/with-sprite canvas layer
-      [explosion (s/make-sprite (first explosion-frames) :scale 4)]
-      (loop [n 0]
-        (s/set-texture! explosion (get explosion-frames n))
-
-        ;; when explosion is maximum size, we can disappear the
-        ;; underlying entity
-        (when (= 3 n)
-          (s/set-visible! entity false))
-
-        (<! (e/wait-frames explosion-speed))
-        (when (< n (dec (count explosion-frames)))
-          (recur (inc n)))))))
-
 (defn run [canvas player]
   (go
-    (loop [heading 0
+    (loop [frame 0
+           heading 0
            fire-cooldown 0]
       (<! (e/next-frame))
 
-      (s/set-rotation! player heading)
+      (when (events/is-pressed? :p)
+        (enemy/spawn canvas :world))
 
-      (starfield/set-position! (-> state deref :pos vec2/as-vector))
+      (s/set-rotation! player (+ heading Math/PI))
+      (let [pos (:pos @state)
+            x (vec2/get-x pos)
+            y (vec2/get-y pos)]
+        (s/set-pivot! (-> canvas :layer :world) x y)
+        (s/set-pivot! (-> canvas :layer :player) x y)
+        (s/set-pivot! (-> canvas :layer :float) x y)
+        (s/set-pos! player x y)
+        ;(log "player" x y)
+        )
 
-      ;; shoot?
-
+      (starfield/set-position!
+       (-> state deref :pos (vec2/scale (/ -1 6)) vec2/as-vector))
 
       ;; update atom pos?
       (swap! state
@@ -111,12 +103,18 @@
 
                                  )))))
 
-      (if (quit?)
+      (if (or (quit?)
+              ;; only check for collision every third frame (HACK WARNING)
+              (if (zero? (mod frame 3))
+                false
+                (enemy/any-collide? (:pos @state))))
         ;; player quits
-        (<! (explosion canvas :world player))
+        (<! (explosion/explosion canvas player))
 
         ;; next loop
         (recur
+         (inc frame)
+
          (cond
            (left?)
            (- heading (:rotate-speed @state))
@@ -130,7 +128,7 @@
          (if (and (fire?) (zero? fire-cooldown))
            (do
              (bullet/spawn canvas :world
-                           (vec2/zero) heading
+                           (:pos @state) heading
                            (:bullet-speed @state)
                            (:bullet-life @state))
              (:fire-delay @state))
