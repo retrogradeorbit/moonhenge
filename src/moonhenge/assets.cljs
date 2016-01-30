@@ -38,7 +38,7 @@
 (def sprites-2-assets
   {:ship
    {:pos [0 0]
-    :size [32 32]}
+    :size [16 16]}
 
    :title-words
    {:pos [0 32]
