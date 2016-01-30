@@ -42,4 +42,4 @@
 
    :title-words
    {:pos [0 32]
-    :size [352 32]}})
+    :size [288 32]}})
