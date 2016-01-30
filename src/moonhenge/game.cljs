@@ -13,6 +13,7 @@
             [infinitelives.pixi.sprite :as s]
             [infinitelives.utils.math :as math]
             [infinitelives.utils.events :as events]
+            [infinitelives.utils.sound :as sound]
             [infinitelives.utils.console :refer [log]]
             [infinitelives.utils.vec2 :as vec2]
             [cljs.core.async :refer [<! timeout]])
@@ -154,6 +155,7 @@
 
          (if (and (fire?) (zero? fire-cooldown))
            (do
+             (sound/play-sound (keyword (str "shoot-" (rand-int 4))) 0.5 false)
              (bullet/spawn canvas :world
                            (:pos @state) heading
                            (:bullet-speed @state)

@@ -13,3 +13,6 @@ pom.xml
 .nrepl-port
 .*.swp
 build
+resources/sfx/*.wav
+resources/sfx/jsfxr
+resources/public/img
