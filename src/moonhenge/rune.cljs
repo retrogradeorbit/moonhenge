@@ -17,7 +17,7 @@
 (def rune-state
   (atom
    {
-    :runes [true true true]
+    :runes [false false false]
 
     }))
 

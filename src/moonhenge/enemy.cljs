@@ -5,6 +5,7 @@
             [moonhenge.bullet :as bullet]
             [moonhenge.explosion :as explosion]
             [moonhenge.moon :as moon]
+            [moonhenge.rune :as rune]
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
@@ -101,9 +102,12 @@
 
 (def levels
   [
-   [1 3 10 30 70 100]
-   [10 30 50 100 300]
-   [30 50 100 300 500]
+   [1 3 ;10 30 70 100
+    ]
+   [3 5 ;50 100 300
+    ]
+   [5 9 ;100 300 500
+    ]
    ])
 
 (defn level [canvas state-atom kill]
@@ -111,12 +115,12 @@
     (<! (timeout 300))
 
     (loop [[lh & lt] levels
-           level-num 1]
+           level-num 0]
       (loop [[h & t] lh]
         (loop [n h]
           (spawn canvas :world state-atom kill)
           (<! (timeout 1000))
-          (when (pos? n)
+          (when (and (pos? n) (not @kill))
             (recur (dec n))))
 
         ;; TODO: wait for no enemies
@@ -124,13 +128,13 @@
           (<! (timeout 1000)))
 
 
-        (when t (recur t)))
+        (when (and (not @kill) t) (recur t)))
 
       ;; level complete
       ;; add rune
       (rune/add-rune! level-num)
 
-      (when lt (recur lt (inc level-num))))
+      (when (and lt (not @kill)) (recur lt (inc level-num))))
 
     ;; game complete
     ;; moon
