@@ -103,6 +103,15 @@
       (starfield/set-position!
        (-> state deref :pos (vec2/scale (/ -1 6)) vec2/as-vector))
 
+      (if (thrust?)
+        (s/set-texture! player (nth [:ship-thrust-0
+                                     :ship-thrust-1
+                                     :ship-thrust-2]
+                                    (mod (/ frame 7) 3)
+                                    ))
+        (s/set-texture! player :ship)
+        )
+
       ;; update atom pos?
       (swap! state
              (fn [s]

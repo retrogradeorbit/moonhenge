@@ -63,7 +63,7 @@
       [stars (starfield/get-sprites)]
 
       (m/with-sprite canvas :player
-        [player (s/make-sprite :ship :scale 4 :y 0)]
+        [player (s/make-sprite :ship :scale 4 :y 0 :yhandle 0.25)]
 
         (starfield/set-star-positions! stars [0 0])
 
