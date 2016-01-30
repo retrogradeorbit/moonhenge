@@ -59,6 +59,7 @@
   (go
     (swap! state assoc :alive true)
     (reset! kill-enemies false)
+    (rune/reset-runes!)
     (loop [frame 0
            heading Math/PI
            fire-cooldown 0]

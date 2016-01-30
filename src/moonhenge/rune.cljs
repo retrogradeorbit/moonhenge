@@ -31,7 +31,12 @@
   )
 
 (defn add-rune! [num]
-  (swap! rune-state assoc :runes [(<= num 1) (<= num 2) (<= num 3)]))
+  (swap! rune-state assoc :runes [(> num 0) (> num 1) (> num 2)]))
+
+(defn reset-runes! []
+  (reset! rune-state {
+    :runes [false false false]
+    }))
 
 (defn run [canvas]
   (go
