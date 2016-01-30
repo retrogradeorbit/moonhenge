@@ -64,6 +64,18 @@
    {:pos [96 0]
     :size [16 16]}
 
+   :bullet-1
+   {:pos [0 16]
+    :size [3 12]}
+
+   :bullet-2
+   {:pos [16 16]
+    :size [3 12]}
+
+   :bullet-3
+   {:pos [32 16]
+    :size [3 12]}
+
    :rune-1
    {:pos [0 64]
     :size [32 32]}
