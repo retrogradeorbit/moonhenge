@@ -120,13 +120,13 @@
       (loop [[h & t] lh]
         (loop [n h]
           (spawn canvas :world state-atom kill)
-          (<! (timeout 1000))
+          (<! (timeout (case level-num 1 1000 2 500 3 100)))
           (when (and (pos? n) (not @kill))
             (recur (dec n))))
 
         ;; TODO: wait for no enemies
         (while (not (empty? @enemies))
-          (<! (timeout 1000)))
+          (<! (e/next-frame)))
 
         ;; wave complete
         (sound/play-sound :wave-respawn-0 0.5 false)
