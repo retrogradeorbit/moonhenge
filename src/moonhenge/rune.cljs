@@ -30,6 +30,9 @@
   (log (str @rune-state))
   )
 
+(defn add-rune! [num]
+  (swap! rune-state assoc :runes [(<= num 1) (<= num 2) (<= num 3)]))
+
 (defn run [canvas]
   (go
     (m/with-sprite-set canvas :runes

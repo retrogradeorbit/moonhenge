@@ -4,6 +4,7 @@
             [moonhenge.starfield :as starfield]
             [moonhenge.game :as game]
             [moonhenge.rune :as rune]
+            [moonhenge.enemy :as enemy]
 
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
@@ -71,8 +72,12 @@
 
         (rune/run canvas)
 
-        (loop []
-          (s/set-visible! player true)
+        (loop [kill (atom false)]
+          (s/set-visible! player false)
           (<! (titlescreen/run canvas))
-          (<! (game/run canvas player))
-          (recur)))) ))
+          (reset! kill true)
+          (enemy/empty-enemies!)
+          (<! (e/next-frame))
+          (s/set-visible! player true)
+          (<! (game/run canvas player kill))
+          (recur kill)))) ))
