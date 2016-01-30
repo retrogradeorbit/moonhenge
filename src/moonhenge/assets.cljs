@@ -40,6 +40,18 @@
    {:pos [0 0]
     :size [16 16]}
 
+   :ship-thrust-0
+   {:pos [112 0]
+    :size [16 32]}
+
+   :ship-thrust-1
+   {:pos [128 0]
+    :size [16 32]}
+
+   :ship-thrust-2
+   {:pos [144 0]
+    :size [16 32]}
+
    :enemy-1
    {:pos [16 0]
     :size [16 16]}
