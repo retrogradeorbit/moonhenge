@@ -2,6 +2,7 @@
   (:require [moonhenge.assets :as assets]
             [moonhenge.titlescreen :as titlescreen]
             [moonhenge.starfield :as starfield]
+            [moonhenge.game :as game]
 
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
@@ -39,4 +40,7 @@
       ;; start the star update thread
       (starfield/star-thread stars)
 
-      (<! (titlescreen/run canvas)))))
+      (loop []
+        (<! (titlescreen/run canvas))
+        (<! (game/run canvas))
+        (recur))) ))

@@ -37,7 +37,8 @@
       (s/set-pos! title-words 0 (- -180 c))
       (s/set-pos! press-key 0 (+ press-any-key-y c))
       (s/set-pos! press-key-shadow 0 (+ press-any-key-y c 4))
-      (recur (* 1.1 c)))))
+      (when (< c 700)
+        (recur (* 1.1 c))))))
 
 (defn run [canvas]
   (go
