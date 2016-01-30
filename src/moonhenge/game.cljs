@@ -24,10 +24,10 @@
     :pos (vec2/zero)
     :vel (vec2/zero)
     :acc (vec2/zero)
-    :max-speed 0.1
-    :thrust 0.006
+    :max-speed 0.15
+    :thrust 0.014
     :drag 0.99
-    :rotate-speed 0.08
+    :rotate-speed 0.09
 
     ;; bullets
     :fire-delay 5
