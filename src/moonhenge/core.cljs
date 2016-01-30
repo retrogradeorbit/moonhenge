@@ -22,7 +22,32 @@
 
 (defonce main-thread
   (go
-    (<! (r/load-resources canvas :ui ["img/sprites.png" "img/sprites-2.png"]))
+    (<! (r/load-resources canvas :ui ["img/sprites.png" "img/sprites-2.png"
+                                      "sfx/shoot-0.ogg"
+                                      "sfx/shoot-1.ogg"
+                                      "sfx/shoot-2.ogg"
+                                      "sfx/shoot-3.ogg"
+                                      "sfx/portal-0.ogg"
+                                      "sfx/moon-rumble-0.ogg"
+                                      "sfx/rune-0.ogg"
+                                      "sfx/rune-1.ogg"
+                                      "sfx/rune-2.ogg"
+                                      "sfx/rune-3.ogg"
+                                      "sfx/rune-4.ogg"
+                                      "sfx/blip-0.ogg"
+                                      "sfx/blip-1.ogg"
+                                      "sfx/blip-2.ogg"
+                                      "sfx/explode-0.ogg"
+                                      "sfx/explode-1.ogg"
+                                      "sfx/explode-2.ogg"
+                                      "sfx/explode-3.ogg"
+                                      "sfx/explode-4.ogg"
+                                      "sfx/explode-5.ogg"
+                                      "sfx/explode-6.ogg"
+                                      "sfx/explode-7.ogg"
+                                      "sfx/explode-8.ogg"
+                                      "sfx/explode-9.ogg"
+                                      "sfx/wave-respawn-0.ogg"]))
 
     (t/load-sprite-sheet!
      (r/get-texture :sprites :nearest)

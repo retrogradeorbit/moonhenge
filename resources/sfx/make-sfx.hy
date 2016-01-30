@@ -31,13 +31,20 @@
 (import [subprocess [call]])
 (import os)
 
+(def names [])
+
 (if (os.path.isdir "jsfxr")
-  (for [sound-name sfx]
-    (print (name sound-name))
-    (for [sfxr-def-num (range (len (get sfx sound-name)))]
-      (let [[wav-name (% "%s-%d.wav" (, (name sound-name) sfxr-def-num))]
-            [ogg-name (.replace wav-name ".wav" ".ogg")]]
-        (call ["./jsfxr/sfxr-to-wav" (get  (get sfx sound-name) sfxr-def-num) wav-name])
-        (call ["oggenc" wav-name "-o" (+ "../public/sfx/" ogg-name)]))))
+  (do
+    (for [sound-name sfx]
+      (print (name sound-name))
+      (for [sfxr-def-num (range (len (get sfx sound-name)))]
+        (let [[wav-name (% "%s-%d.wav" (, (name sound-name) sfxr-def-num))]
+              [ogg-name (.replace wav-name ".wav" ".ogg")]]
+          (.append names (+ "\"sfx/" ogg-name "\""))
+          (print "->" wav-name)
+          (call ["./jsfxr/sfxr-to-wav" (get  (get sfx sound-name) sfxr-def-num) wav-name])
+          (call ["oggenc" "-Q" wav-name "-o" (+ "../public/sfx/" ogg-name)]))))
+    (for [n names]
+      (print n)))
   (print "You need jsfxr:\ngit clone https://github.com/chr15m/jsfxr.git"))
 
