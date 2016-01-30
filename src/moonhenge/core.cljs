@@ -36,4 +36,7 @@
       [stars (starfield/get-sprites)]
       (starfield/set-positions! stars 0)
 
-      (<! (titlescreen/run canvas stars)))))
+      ;; start the star update thread
+      (starfield/star-thread stars)
+
+      (<! (titlescreen/run canvas)))))

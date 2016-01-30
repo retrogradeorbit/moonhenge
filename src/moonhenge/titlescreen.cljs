@@ -19,13 +19,10 @@
 
 (defn title
   "display titlescreen and wait for keypress"
-  [canvas stars]
+  [canvas]
   (go
     (loop [c 0]
       (<! (e/next-frame))
-
-    ;;;;;; move stars...
-      (starfield/set-positions! stars c)
 
       (when-not (events/any-pressed?)
         (recur (inc c))))))
@@ -42,7 +39,7 @@
       (s/set-pos! press-key-shadow 0 (+ press-any-key-y c 4))
       (recur (* 1.1 c)))))
 
-(defn run [canvas stars]
+(defn run [canvas]
   (go
     (m/with-sprite canvas :ui
       [press-key-shadow
@@ -60,5 +57,5 @@
 
        ship (s/make-sprite :ship :scale 4 :y 25)
        ]
-      (<! (title canvas stars))
+      (<! (title canvas))
       (<! (move-titles canvas title-words press-key press-key-shadow)))))
