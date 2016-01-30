@@ -89,7 +89,7 @@
                 (bullet/remove! bull))
 
               ;; still alive
-              (do (log kill "=" @kill)
+              (do ;(log kill "=" @kill)
                   (when (not @kill)
                     (recur
                      (if (:alive @state-atom)
@@ -98,21 +98,43 @@
 
                      ))))))))))
 
-(defn level [canvas num state-atom kill]
+(def levels
+  [
+   [1 3 10 30 70 100]
+   [10 30 50 100 300]
+   [30 50 100 300 500]
+   ])
+
+(defn level [canvas state-atom kill]
   (go
     (<! (timeout 300))
 
-    (loop [[h & t] [10 30 50 100 300 500]]
-      (loop [n h]
-        (spawn canvas :world state-atom kill)
-        (<! (timeout 1000))
-        (when (pos? n)
-          (recur (dec n))))
+    (loop [[lh & lt] levels
+           level-num 1]
+      (loop [[h & t] lh]
+        (loop [n h]
+          (spawn canvas :world state-atom kill)
+          (<! (timeout 1000))
+          (when (pos? n)
+            (recur (dec n))))
 
-      ;; TODO: wait for no enemies
-      (while (not (empty? @enemies))
-        (<! (timeout 1000)))
+        ;; TODO: wait for no enemies
+        (while (not (empty? @enemies))
+          (<! (timeout 1000)))
 
 
-      (when t (recur t))))
+        (when t (recur t)))
+
+      ;; level complete
+      ;; add rune
+      (rune/add-rune! level-num)
+
+      (when lt (recur lt (inc level-num))))
+
+    ;; game complete
+    ;; moon
+    (moon/spawn canvas)
+
+
+    )
   )

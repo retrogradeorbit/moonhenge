@@ -85,7 +85,7 @@
 
       ;; spawn enemies automatically
       (when (zero? frame)
-        (enemy/level canvas 1 state kill-enemies))
+        (enemy/level canvas state kill-enemies))
 
       (s/set-rotation! player (+ heading Math/PI))
       (let [pos (:pos @state)
