@@ -38,7 +38,7 @@
                 :source-paths ["src"]
                 :compiler {:output-to "build/js/compiled/moonhenge.js"
                            :main moonhenge.core
-                           :optimizations :advanced
+                           :optimizations :simple
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
