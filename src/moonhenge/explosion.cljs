@@ -7,6 +7,7 @@
             [infinitelives.pixi.sprite :as s]
             [infinitelives.utils.math :as math]
             [infinitelives.utils.events :as events]
+            [infinitelives.utils.sound :as sound]
             [infinitelives.utils.console :refer [log]]
             [infinitelives.utils.vec2 :as vec2]
             [cljs.core.async :refer [<! timeout]])
@@ -19,6 +20,7 @@
 (def explosion-speed 6)
 
 (defn explosion [canvas entity]
+  (sound/play-sound (keyword (str "explode-" (rand-int 10))) 0.5 false)
   (go
     (let [pos (s/get-pos entity)
           x (vec2/get-x pos)
