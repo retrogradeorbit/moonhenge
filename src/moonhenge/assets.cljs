@@ -81,11 +81,11 @@
     :size [32 32]}
 
    :rune-2
-   {:pos [64 64]
+   {:pos [32 64]
     :size [32 32]}
 
    :rune-3
-   {:pos [96 64]
+   {:pos [64 64]
     :size [32 32]}
 
    :explosion-0

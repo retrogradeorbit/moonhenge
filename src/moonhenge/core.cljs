@@ -3,6 +3,7 @@
             [moonhenge.titlescreen :as titlescreen]
             [moonhenge.starfield :as starfield]
             [moonhenge.game :as game]
+            [moonhenge.rune :as rune]
 
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
@@ -16,7 +17,7 @@
                    [infinitelives.pixi.macros :as m]))
 
 (defonce canvas
-  (c/init {:layers [:bg :stars :world :moon :player :float :ui] :background 0x000000 :expand true}))
+  (c/init {:layers [:bg :stars :world :runes :moon :player :float :ui] :background 0x000000 :expand true}))
 
 
 (defonce main-thread
@@ -40,9 +41,10 @@
 
         (starfield/set-star-positions! stars [0 0])
 
-
         ;; start the star update thread
         (starfield/star-thread stars)
+
+        (rune/run canvas)
 
         (loop []
           (s/set-visible! player true)
