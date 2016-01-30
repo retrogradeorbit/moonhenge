@@ -26,7 +26,7 @@
                 :max-speed 1.0}]
         (s/set-pos! astro (:pos b))
         (s/set-texture! astro
-         (nth [:astronaut-1 :astronaut-2] (mod (/ frame 13) 2)))
+         (nth [:astronaut-1 :astronaut-2] (mod (/ frame 7) 2)))
         (<! (e/next-frame))
         (when-not @kill-atom
           (recur (inc frame)

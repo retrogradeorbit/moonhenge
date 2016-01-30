@@ -40,6 +40,18 @@
    {:pos [0 0]
     :size [16 16]}
 
+   :ship-thrust-0
+   {:pos [112 0]
+    :size [16 32]}
+
+   :ship-thrust-1
+   {:pos [128 0]
+    :size [16 32]}
+
+   :ship-thrust-2
+   {:pos [144 0]
+    :size [16 32]}
+
    :enemy-1
    {:pos [16 0]
     :size [16 16]}
@@ -65,15 +77,15 @@
     :size [16 16]}
 
    :bullet-1
-   {:pos [0 16]
+   {:pos [6 19]
     :size [3 12]}
 
    :bullet-2
-   {:pos [16 16]
+   {:pos [22 19]
     :size [3 12]}
 
    :bullet-3
-   {:pos [32 16]
+   {:pos [38 19]
     :size [3 12]}
 
    :rune-1
