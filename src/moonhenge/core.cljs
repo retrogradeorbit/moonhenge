@@ -1,6 +1,8 @@
 (ns moonhenge.core
   (:require [moonhenge.assets :as assets]
             [moonhenge.titlescreen :as titlescreen]
+            [moonhenge.starfield :as starfield]
+
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
@@ -13,7 +15,7 @@
                    [infinitelives.pixi.macros :as m]))
 
 (defonce canvas
-  (c/init {:layers [:bg :ui] :background 0x000000 :expand true}))
+  (c/init {:layers [:bg :stars :ui] :background 0x000000 :expand true}))
 
 
 
@@ -29,6 +31,9 @@
      (r/get-texture :sprites-2 :nearest)
      assets/sprites-2-assets)
 
-    (<! (titlescreen/run canvas))
+    ;; starfield
+    (m/with-sprite-set canvas :stars
+      [stars (starfield/get-sprites)]
+      (starfield/set-positions! stars 0)
 
-    ))
+      (<! (titlescreen/run canvas stars)))))
