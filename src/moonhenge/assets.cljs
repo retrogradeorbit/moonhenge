@@ -37,7 +37,7 @@
 
 (def sprites-2-assets
   {:ship
-   {:pos [0 0]
+   {:pos [160 0]
     :size [16 16]}
 
    :ship-thrust-0
