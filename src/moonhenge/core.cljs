@@ -19,7 +19,6 @@
   (c/init {:layers [:bg :stars :world :player :float :ui] :background 0x000000 :expand true}))
 
 
-
 (defonce main-thread
   (go
     (<! (r/load-resources canvas :ui ["img/sprites.png" "img/sprites-2.png"]))
