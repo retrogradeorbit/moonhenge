@@ -9,6 +9,9 @@
             [infinitelives.utils.events :as events]
             [infinitelives.utils.console :refer [log]]
             [cljs.core.async :refer [<!]])
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [infinitelives.pixi.macros :as m])
+
   )
 
 (def num-stars 150)
@@ -47,3 +50,11 @@
                     (- (mod (+ (* 4 y) (* speed frame z)) h) hh)))
       stars-set
       stars))))
+
+
+(defn star-thread [stars]
+  (go
+    (loop [c 0]
+      (<! (e/next-frame))
+      (set-positions! stars c)
+      (recur (inc c)))))
