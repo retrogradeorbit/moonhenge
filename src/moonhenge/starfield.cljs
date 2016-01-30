@@ -10,9 +10,7 @@
             [infinitelives.utils.console :refer [log]]
             [cljs.core.async :refer [<!]])
   (:require-macros [cljs.core.async.macros :refer [go]]
-                   [infinitelives.pixi.macros :as m])
-
-  )
+                   [infinitelives.pixi.macros :as m]))
 
 (def num-stars 150)
 (def stars-set (sort-by
@@ -27,6 +25,11 @@
 
 (def scale 4)
 
+(def position (atom [0 0]))
+
+(defn set-position! [pos]
+  (reset! position pos))
+
 (defn get-sprites []
   (for [{:keys [x y z depth]} stars-set]
     (s/make-sprite
@@ -36,18 +39,17 @@
      :scale scale)))
 
 
-(defn set-positions! [stars frame]
+(defn set-star-positions! [stars [xp yp]]
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)
         hw (/ w 2)
-        hh (/ h 2)
-        speed 1]
+        hh (/ h 2)]
     (doall
      (map
       (fn [{:keys [x y z] :as old} sprite]
         (s/set-pos! sprite
-                    (- (mod (* 4 x)  w) hw)
-                    (- (mod (+ (* 4 y) (* speed frame z)) h) hh)))
+                    (- (mod (+ (* 4 x) (* xp z)) w) hw)
+                    (- (mod (+ (* 4 y) (* yp z)) h) hh)))
       stars-set
       stars))))
 
@@ -56,5 +58,5 @@
   (go
     (loop [c 0]
       (<! (e/next-frame))
-      (set-positions! stars c)
+      (set-star-positions! stars @position)
       (recur (inc c)))))

@@ -16,7 +16,7 @@
                    [infinitelives.pixi.macros :as m]))
 
 (defonce canvas
-  (c/init {:layers [:bg :stars :ui] :background 0x000000 :expand true}))
+  (c/init {:layers [:bg :stars :world :ui] :background 0x000000 :expand true}))
 
 
 
@@ -35,12 +35,16 @@
     ;; starfield
     (m/with-sprite-set canvas :stars
       [stars (starfield/get-sprites)]
-      (starfield/set-positions! stars 0)
 
-      ;; start the star update thread
-      (starfield/star-thread stars)
+      (m/with-sprite canvas :world
+        [player (s/make-sprite :ship :scale 4 :y 25)]
 
-      (loop []
-        (<! (titlescreen/run canvas))
-        (<! (game/run canvas))
-        (recur))) ))
+        (starfield/set-star-positions! stars [0 0])
+
+        ;; start the star update thread
+        (starfield/star-thread stars)
+
+        (loop []
+          (<! (titlescreen/run canvas))
+          (<! (game/run canvas player))
+          (recur)))) ))

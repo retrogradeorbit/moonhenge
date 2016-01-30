@@ -55,8 +55,6 @@
        (s/make-sprite :title-words :scale 2
                       :x 0
                       :y -180)
-
-       ship (s/make-sprite :ship :scale 4 :y 25)
        ]
       (<! (title canvas))
       (<! (move-titles canvas title-words press-key press-key-shadow)))))
