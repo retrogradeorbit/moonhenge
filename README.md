@@ -1,3 +1,5 @@
+![Title screen](./screenshot.png)
+
 # moonhenge
 
 Global Game Jam 2016 entry.
