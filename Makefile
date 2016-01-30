@@ -25,3 +25,4 @@ resources/public/img/sprites.png: resources/img/sprites.png
 	convert resources/img/sprites.png -alpha On -transparent '#010203' resources/public/img/sprites.png
 
 images: resources/public/img/sprites.png
+	cp resources/img/sprites-2.png resources/public/img/sprites-2.png
