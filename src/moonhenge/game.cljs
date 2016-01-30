@@ -29,7 +29,7 @@
     :max-speed 0.15
     :thrust 0.014
     :drag 0.99
-    :rotate-speed 0.09
+    :rotate-speed 0.085
     :alive false
 
     ;; bullets
@@ -156,7 +156,7 @@
 
          (if (and (fire?) (zero? fire-cooldown))
            (do
-             (sound/play-sound (keyword (str "shoot-" (rand-int 4))) 0.5 false)
+             (sound/play-sound :shoot-3 0.5 false)
              (bullet/spawn canvas :world
                            (:pos @state) heading
                            (:bullet-speed @state)

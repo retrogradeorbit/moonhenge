@@ -3,9 +3,11 @@ APP=build/js/compiled/moonhenge.js
 IDX=build/index.html
 IMG=build/img/sprites.png build/img/sprites-2.png
 IMG_PUBLIC=$(subst build,resources/public,$(IMG))
+SFX_SOURCE=$(wildcard resources/public/sfx/*.ogg)
+SFX=$(subst resources/public,build,$(SFX_SOURCE))
 ME=$(shell basename $(shell pwd))
 
-all: $(APP) $(CSS) $(IDX) $(IMG)
+all: $(APP) $(CSS) $(IDX) $(IMG) $(SFX)
 
 $(CSS): resources/public/css/style.css
 	mkdir -p $(dir $(CSS))
@@ -22,6 +24,10 @@ $(IMG): $(IMG_PUBLIC)
 	mkdir -p build/img/
 	cp $? build/img/
 
+$(SFX): $(SFX_SOURCE)
+	mkdir -p build/sfx/
+	cp $? build/sfx/
+
 resources/public/img/sprites.png: resources/img/sprites.png
 	mkdir -p resources/public/img
 	convert resources/img/sprites.png -alpha On -transparent '#010203' resources/public/img/sprites.png
@@ -33,6 +39,6 @@ images: $(IMG_PUBLIC)
 
 clean:
 	lein clean
-	rm -rf $(CSS) $(APP) $(IDX) $(IMG)
+	rm -rf $(CSS) $(APP) $(IDX) $(IMG) $(SFX)
 	rm resources/public/img/sprites*.png
 
