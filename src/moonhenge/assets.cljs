@@ -76,6 +76,30 @@
    {:pos [96 64]
     :size [32 32]}
 
+   :explosion-0
+   {:pos [0 96]
+    :size [32 32]}
+
+   :explosion-1
+   {:pos [32 96]
+    :size [32 32]}
+
+   :explosion-2
+   {:pos [64 96]
+    :size [32 32]}
+
+   :explosion-3
+   {:pos [96 96]
+    :size [32 32]}
+
+   :explosion-4
+   {:pos [128 96]
+    :size [32 32]}
+
+   :explosion-5
+   {:pos [160 96]
+    :size [32 32]}
+
    :title-words
    {:pos [0 32]
     :size [288 32]}})
