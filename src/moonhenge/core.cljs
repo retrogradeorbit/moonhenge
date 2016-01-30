@@ -41,6 +41,7 @@
 
         (starfield/set-star-positions! stars [0 0])
 
+
         ;; start the star update thread
         (starfield/star-thread stars)
 
