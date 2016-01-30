@@ -65,15 +65,15 @@
     :size [16 16]}
 
    :bullet-1
-   {:pos [0 16]
+   {:pos [6 19]
     :size [3 12]}
 
    :bullet-2
-   {:pos [16 16]
+   {:pos [22 19]
     :size [3 12]}
 
    :bullet-3
-   {:pos [32 16]
+   {:pos [38 19]
     :size [3 12]}
 
    :rune-1
