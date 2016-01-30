@@ -112,6 +112,26 @@
    {:pos [160 96]
     :size [32 32]}
 
+   :moon
+   {:pos [0 128]
+    :size [128 128]}
+
+   :astronaut-1
+   {:pos [0 256]
+    :size [16 16]}
+
+   :astronaut-1
+   {:pos [16 256]
+    :size [16 16]}
+
+   :henge
+   {:pos [32 256]
+    :size [64 64]}
+
+   :moon-surface
+   {:pos [512 0]
+    :size [512 128]}
+
    :title-words
    {:pos [0 32]
     :size [288 32]}})
