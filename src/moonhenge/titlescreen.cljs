@@ -6,6 +6,8 @@
             [infinitelives.pixi.texture :as t]
             [infinitelives.pixi.sprite :as s]
             [infinitelives.utils.math :as math]
+            [infinitelives.utils.events :as events]
+            [infinitelives.utils.console :refer [log]]
             [cljs.core.async :refer [<!]])
   (:require-macros [cljs.core.async.macros :refer [go]]
                    [infinitelives.pixi.macros :as m]))
@@ -47,6 +49,8 @@
          (s/make-sprite :title-words :scale 2
                         :x 4
                         :y -180)
+
+         ship (s/make-sprite :ship :scale 4 :y 25)
          ]
 
         (loop [c 0]
@@ -62,9 +66,10 @@
              (map
               (fn [{:keys [x y z] :as old} sprite]
                 (s/set-pos! sprite
-                            (- (mod (- (* 4 x) (* speed c z)) w) hw)
-                            (- (mod (* 4 y) h) hh)))
+                            (- (mod (* 4 x)  w) hw)
+                            (- (mod (+ (* 4 y) (* speed c z)) h) hh)))
               stars-set
               stars)))
 
-          (recur (inc c)))))))
+          (when-not (events/any-pressed?)
+            (recur (inc c))))))))
