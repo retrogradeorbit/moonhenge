@@ -33,7 +33,7 @@
      :scale scale)))
 
 
-(defn set-positions [stars frame]
+(defn set-positions! [stars frame]
   (let [w (.-innerWidth js/window)
         h (.-innerHeight js/window)
         hw (/ w 2)

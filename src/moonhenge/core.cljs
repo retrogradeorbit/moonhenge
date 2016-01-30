@@ -34,6 +34,6 @@
     ;; starfield
     (m/with-sprite-set canvas :stars
       [stars (starfield/get-sprites)]
-      (starfield/set-positions stars 0)
+      (starfield/set-positions! stars 0)
 
-      (<! (titlescreen/run canvas)))))
+      (<! (titlescreen/run canvas stars)))))

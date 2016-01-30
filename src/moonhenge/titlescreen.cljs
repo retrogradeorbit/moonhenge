@@ -1,5 +1,6 @@
 (ns moonhenge.titlescreen
   (:require [moonhenge.assets :as assets]
+            [moonhenge.starfield :as starfield]
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
@@ -18,13 +19,13 @@
 
 (defn title
   "display titlescreen and wait for keypress"
-  [canvas]
+  [canvas stars]
   (go
     (loop [c 0]
       (<! (e/next-frame))
 
     ;;;;;; move stars...
-
+      (starfield/set-positions! stars c)
 
       (when-not (events/any-pressed?)
         (recur (inc c))))))
@@ -41,7 +42,7 @@
       (s/set-pos! press-key-shadow 0 (+ press-any-key-y c 4))
       (recur (* 1.1 c)))))
 
-(defn run [canvas]
+(defn run [canvas stars]
   (go
     (m/with-sprite canvas :ui
       [press-key-shadow
@@ -59,5 +60,5 @@
 
        ship (s/make-sprite :ship :scale 4 :y 25)
        ]
-      (<! (title canvas))
+      (<! (title canvas stars))
       (<! (move-titles canvas title-words press-key press-key-shadow)))))
