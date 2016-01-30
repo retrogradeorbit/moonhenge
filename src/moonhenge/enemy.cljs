@@ -4,6 +4,7 @@
             [moonhenge.boid :as boid]
             [moonhenge.bullet :as bullet]
             [moonhenge.explosion :as explosion]
+            [moonhenge.moon :as moon]
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
