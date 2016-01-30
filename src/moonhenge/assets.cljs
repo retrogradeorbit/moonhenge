@@ -64,6 +64,18 @@
    {:pos [96 0]
     :size [16 16]}
 
+   :rune-1
+   {:pos [0 64]
+    :size [32 32]}
+
+   :rune-2
+   {:pos [64 64]
+    :size [32 32]}
+
+   :rune-3
+   {:pos [96 64]
+    :size [32 32]}
+
    :title-words
    {:pos [0 32]
     :size [288 32]}})
