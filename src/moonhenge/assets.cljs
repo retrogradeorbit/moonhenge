@@ -93,11 +93,11 @@
     :size [32 32]}
 
    :rune-2
-   {:pos [32 64]
+   {:pos [64 64]
     :size [32 32]}
 
    :rune-3
-   {:pos [64 64]
+   {:pos [96 64]
     :size [32 32]}
 
    :explosion-0
@@ -139,6 +139,18 @@
    :henge
    {:pos [32 256]
     :size [64 64]}
+
+   :henge-fire-0
+   {:pos [96 256]
+    :size [16 32]}
+
+   :henge-fire-1
+   {:pos [112 256]
+    :size [16 32]}
+
+   :henge-fire-2
+   {:pos [128 256]
+    :size [16 32]}
 
    :moon-surface
    {:pos [512 0]
