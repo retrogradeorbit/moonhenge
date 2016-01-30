@@ -12,7 +12,7 @@
   (:require-macros [cljs.core.async.macros :refer [go]]
                    [infinitelives.pixi.macros :as m]))
 
-(def num-stars 150)
+(def num-stars 100)
 (def stars-set (sort-by
                 :z
                 (map (fn [n]

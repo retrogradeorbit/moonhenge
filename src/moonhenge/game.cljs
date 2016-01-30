@@ -4,6 +4,7 @@
             [moonhenge.bullet :as bullet]
             [moonhenge.enemy :as enemy]
             [moonhenge.explosion :as explosion]
+            [moonhenge.moon :as moon]
             [infinitelives.pixi.canvas :as c]
             [infinitelives.pixi.events :as e]
             [infinitelives.pixi.resources :as r]
@@ -54,12 +55,17 @@
 (defn run [canvas player]
   (go
     (loop [frame 0
-           heading 0
+           heading Math/PI
            fire-cooldown 0]
       (<! (e/next-frame))
 
       (when (events/is-pressed? :p)
+        (while (events/is-pressed? :p) (<! (e/next-frame)))
         (enemy/spawn canvas :world))
+
+      (when (events/is-pressed? :m)
+        (while (events/is-pressed? :m) (<! (e/next-frame)))
+        (moon/spawn canvas))
 
       (s/set-rotation! player (+ heading Math/PI))
       (let [pos (:pos @state)

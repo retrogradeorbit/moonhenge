@@ -65,6 +65,7 @@
             ;; die
             (do
               (explosion/explosion canvas enemy)
+              (swap! enemies dissoc ekey)
               (bullet/remove! bull))
 
             ;; still alive

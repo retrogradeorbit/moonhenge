@@ -120,7 +120,7 @@
    {:pos [0 256]
     :size [16 16]}
 
-   :astronaut-1
+   :astronaut-2
    {:pos [16 256]
     :size [16 16]}
 
