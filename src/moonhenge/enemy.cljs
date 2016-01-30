@@ -17,7 +17,8 @@
   (:require-macros [cljs.core.async.macros :refer [go]]
                    [infinitelives.pixi.macros :as m]))
 
-(def sprite :enemy-1)
+(def enemy-choice [:enemy-0 :enemy-1 :enemy-2 :enemy-3
+                   :enemy-4 :enemy-5 :enemy-6])
 
 (def enemies (atom {}))
 
@@ -33,10 +34,19 @@
                            bullets)))]
     (first bull)))
 
+(defn any-collide?
+  "return nil if no enemy collides with this position
+  else return the enemy key that collides with it"
+  [pos]
+  (first (first
+          (filter #(< (% 1) 800)
+                  (map (fn [[k v]] [k (-> v s/get-pos (vec2/distance-squared pos))])
+                       @enemies)))))
+
 (defn spawn [canvas layer]
   (go
     (m/with-sprite canvas layer
-      [enemy (s/make-sprite sprite :scale 4)]
+      [enemy (s/make-sprite (rand-nth enemy-choice) :scale 4)]
       (let [ekey (keyword (gensym))]
         (swap! enemies assoc ekey enemy)
         (loop [b {:mass 10.0

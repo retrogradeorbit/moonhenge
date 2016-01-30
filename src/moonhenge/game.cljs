@@ -53,7 +53,8 @@
 
 (defn run [canvas player]
   (go
-    (loop [heading 0
+    (loop [frame 0
+           heading 0
            fire-cooldown 0]
       (<! (e/next-frame))
 
@@ -102,12 +103,18 @@
 
                                  )))))
 
-      (if (quit?)
+      (if (or (quit?)
+              ;; only check for collision every third frame (HACK WARNING)
+              (if (zero? (mod frame 3))
+                false
+                (enemy/any-collide? (:pos @state))))
         ;; player quits
         (<! (explosion/explosion canvas player))
 
         ;; next loop
         (recur
+         (inc frame)
+
          (cond
            (left?)
            (- heading (:rotate-speed @state))
