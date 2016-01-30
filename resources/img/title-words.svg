@@ -27,7 +27,7 @@
       <stop
          id="stop3765"
          offset="0.41334233"
-         style="stop-color:#d1e2ea;stop-opacity:1;" />
+         style="stop-color:#f1f6f9;stop-opacity:1;" />
       <stop
          style="stop-color:#888417;stop-opacity:1;"
          offset="0.41334233"
@@ -56,6 +56,46 @@
        x2="352.80731"
        y2="116.33733"
        gradientTransform="translate(-0.14286041,100.28572)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3757"
+       id="linearGradient3006"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.1254902,0,0,0.1254902,84.809523,263.54475)"
+       x1="352.71146"
+       y1="78.456612"
+       x2="352.71146"
+       y2="116.69213" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3757"
+       id="linearGradient3780"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.25098039,0,0,0.25098039,72.619045,268.72731)"
+       x1="352.71146"
+       y1="78.456612"
+       x2="352.71146"
+       y2="116.69213" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3757"
+       id="linearGradient3786"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.50196075,0,0,0.50196075,48.23809,269.09243)"
+       x1="352.71146"
+       y1="78.456612"
+       x2="352.71146"
+       y2="116.69213" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3757"
+       id="linearGradient3792"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.37647055,0,0,0.37647055,60.428569,323.90987)"
+       x1="352.71146"
+       y1="78.456612"
+       x2="352.71146"
+       y2="116.69213" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -64,9 +104,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.979899"
-     inkscape:cx="391.34218"
-     inkscape:cy="882.73129"
+     inkscape:zoom="4"
+     inkscape:cx="190.42457"
+     inkscape:cy="737.85729"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -124,6 +164,66 @@
          y="218.36218"
          x="97"
          id="tspan3773"
+         sodipodi:role="line">MoonHenge</tspan></text>
+    <text
+       inkscape:export-ydpi="54.211765"
+       inkscape:export-xdpi="54.211765"
+       inkscape:export-filename="/home/chrism/dev/moonhenge/resources/img/title-words.png"
+       xml:space="preserve"
+       style="font-size:5.01960801999999973px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3006);fill-opacity:1;stroke:none;font-family:M51_SLEEPEN SADNESS;-inkscape-font-specification:M51_SLEEPEN SADNESS"
+       x="97"
+       y="278.36218"
+       id="text3002"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3004"
+         x="97"
+         y="278.36218"
+         style="fill:url(#linearGradient3006);fill-opacity:1">MoonHenge</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3776"
+       y="298.36218"
+       x="97"
+       style="font-size:10.03921604px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3780);fill-opacity:1;stroke:none;font-family:M51_SLEEPEN SADNESS;-inkscape-font-specification:M51_SLEEPEN SADNESS"
+       xml:space="preserve"
+       inkscape:export-filename="/home/chrism/dev/moonhenge/resources/img/title-words.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="fill:url(#linearGradient3780);fill-opacity:1"
+         y="298.36218"
+         x="97"
+         id="tspan3778"
+         sodipodi:role="line">MoonHenge</tspan></text>
+    <text
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/chrism/dev/moonhenge/resources/img/title-words.png"
+       xml:space="preserve"
+       style="font-size:20.07843208px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3786);fill-opacity:1;stroke:none;font-family:M51_SLEEPEN SADNESS;-inkscape-font-specification:M51_SLEEPEN SADNESS"
+       x="97"
+       y="328.36218"
+       id="text3782"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3784"
+         x="97"
+         y="328.36218"
+         style="fill:url(#linearGradient3786);fill-opacity:1">MoonHenge</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3788"
+       y="368.36218"
+       x="97"
+       style="font-size:15.05882359px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient3792);fill-opacity:1;stroke:none;font-family:M51_SLEEPEN SADNESS;-inkscape-font-specification:M51_SLEEPEN SADNESS"
+       xml:space="preserve"
+       inkscape:export-filename="/home/chrism/dev/moonhenge/resources/img/title-words.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         style="fill:url(#linearGradient3792);fill-opacity:1"
+         y="368.36218"
+         x="97"
+         id="tspan3790"
          sodipodi:role="line">MoonHenge</tspan></text>
   </g>
 </svg>
