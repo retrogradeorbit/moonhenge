@@ -125,28 +125,31 @@
             (recur (dec n))))
 
         ;; TODO: wait for no enemies
-        (while (not (empty? @enemies))
+        (while (and (not (empty? @enemies))
+                    (not @kill))
           (<! (e/next-frame)))
 
         ;; wave complete
-        (sound/play-sound :wave-respawn-0 0.5 false)
+        (when (not (empty? @enemies))
+          (sound/play-sound :wave-respawn-0 0.5 false))
 
         (when (and (not @kill) t) (recur t)))
 
       ;; level complete
       ;; add rune
-      (rune/add-rune! level-num)
-      (sound/play-sound (rand-nth [:rune-0 :rune-1 :rune-2 :rune-3 :rune-4])
-                        0.5 false)
+      (when (not @kill)
+        (rune/add-rune! level-num)
+        (sound/play-sound (rand-nth [:rune-0 :rune-1 :rune-2 :rune-3 :rune-4])
+                          0.5 false)
 
-      (when (and lt (not @kill)) (recur lt (inc level-num))))
+        (when (and lt (not @kill)) (recur lt (inc level-num)))))
 
     ;; game complete
     ;; moon
-    (<! (timeout 3000))
-    (sound/play-sound :moon-rumble-0 0.8 false)
-    (moon/spawn canvas)
+    (when (not @kill)
+      (loop [n (/ 3000 60)]
+        (<! (e/next-frame))
+        (when (pos? n) (recur (dec n))))
 
-
-    )
-  )
+      (sound/play-sound :moon-rumble-0 0.8 false)
+      (moon/spawn canvas))))
