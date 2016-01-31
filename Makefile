@@ -5,6 +5,8 @@ IMG=build/img/sprites.png build/img/sprites-2.png
 IMG_PUBLIC=$(subst build,resources/public,$(IMG))
 SFX_SOURCE=$(wildcard resources/public/sfx/*.ogg)
 SFX=$(subst resources/public,build,$(SFX_SOURCE))
+MUSIC_SOURCE=$(wildcard resources/public/music/*.ogg)
+MUSIC=$(subst resources/public,build,$(MUSIC_SOURCE))
 ME=$(shell basename $(shell pwd))
 
 all: $(APP) $(CSS) $(IDX) $(IMG) $(SFX)
@@ -28,6 +30,10 @@ $(SFX): $(SFX_SOURCE)
 	mkdir -p build/sfx/
 	cp $? build/sfx/
 
+$(MUSIC): $(MUSIC_SOURCE)
+	mkdir -p build/music/
+	cp $? build/music/
+
 resources/public/img/sprites.png: resources/img/sprites.png
 	mkdir -p resources/public/img
 	convert resources/img/sprites.png -alpha On -transparent '#010203' resources/public/img/sprites.png
@@ -39,6 +45,6 @@ images: $(IMG_PUBLIC)
 
 clean:
 	lein clean
-	rm -rf $(CSS) $(APP) $(IDX) $(IMG) $(SFX)
+	rm -rf $(CSS) $(APP) $(IDX) $(IMG) $(SFX) $(MUSIC)
 	rm resources/public/img/sprites*.png
 
