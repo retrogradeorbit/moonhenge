@@ -9,7 +9,7 @@ MUSIC_SOURCE=$(wildcard resources/public/music/*.ogg)
 MUSIC=$(subst resources/public,build,$(MUSIC_SOURCE))
 ME=$(shell basename $(shell pwd))
 
-all: $(APP) $(CSS) $(IDX) $(IMG) $(SFX)
+all: $(APP) $(CSS) $(IDX) $(IMG) $(SFX) $(MUSIC)
 
 $(CSS): resources/public/css/style.css
 	mkdir -p $(dir $(CSS))
