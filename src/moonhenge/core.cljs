@@ -12,6 +12,7 @@
             [infinitelives.pixi.texture :as t]
             [infinitelives.pixi.sprite :as s]
             [infinitelives.utils.math :as math]
+            [infinitelives.utils.sound :as sound]
 
             [cljs.core.async :refer [<!]])
   (:require-macros [cljs.core.async.macros :refer [go]]
@@ -48,7 +49,10 @@
                                       "sfx/explode-7.ogg"
                                       "sfx/explode-8.ogg"
                                       "sfx/explode-9.ogg"
-                                      "sfx/wave-respawn-0.ogg"]))
+                                      "sfx/wave-respawn-0.ogg"
+                                      "music/moonhenge.ogg"]))
+
+    (js/console.log (sound/play-sound :moonhenge 0.25 true))
 
     (t/load-sprite-sheet!
      (r/get-texture :sprites :nearest)
