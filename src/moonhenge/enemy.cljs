@@ -20,7 +20,7 @@
   (:require-macros [cljs.core.async.macros :refer [go]]
                    [infinitelives.pixi.macros :as m]))
 
-(def enemy-choice [:enemy-0 :enemy-1 :enemy-2 :enemy-3
+(def enemy-choice [:enemy-1 :enemy-2 :enemy-3
                    :enemy-4 :enemy-5 :enemy-6])
 
 (def enemies (atom {}))
