@@ -1,3 +1,5 @@
+[Play it.](https://retrogradeorbit.github.io/moonhenge/)
+
 ![Title screen](./screenshot.png)
 
 # moonhenge
