@@ -38,6 +38,9 @@
     :runes [false false false]
     }))
 
+(defn num []
+  (count (filter identity (:runes @rune-state))))
+
 (defn run [canvas]
   (go
     (m/with-sprite-set canvas :runes

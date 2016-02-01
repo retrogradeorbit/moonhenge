@@ -64,19 +64,31 @@
 (defn spawn [canvas layer state-atom kill]
   (go
     (let [start-pos (-> @state-atom
-                           :pos
-                           (vec2/add (vec2/scale (vec2/random-unit) 2000)))]
+                        :pos
+                        (vec2/add (vec2/scale (vec2/random-unit) 1000)))]
       (m/with-sprite canvas layer
         [enemy (s/make-sprite (rand-nth enemy-choice) :scale 4
                               :x (vec2/get-x start-pos)
                               :y (vec2/get-y start-pos))]
         (let [ekey (keyword (gensym))]
           (swap! enemies assoc ekey enemy)
-          (loop [b {:mass 10.0
-                    :pos start-pos
-                    :vel (vec2/zero)
-                    :max-force 1.0
-                    :max-speed 3.0}]
+          (loop [b (case (rune/num)
+                     0 {:mass 10.0
+                        :pos start-pos
+                        :vel (vec2/zero)
+                        :max-force 1.0
+                        :max-speed 3.0}
+                     1 {:mass 10.0
+                        :pos start-pos
+                        :vel (vec2/zero)
+                        :max-force 1.0
+                        :max-speed 3.5}
+                     2 {:mass 10.0
+                        :pos start-pos
+                        :vel (vec2/zero)
+                        :max-force 1.0
+                        :max-speed 4}
+                     3 {})]
             (<! (e/next-frame))
 
             (s/set-pos! enemy (:pos b))
@@ -92,22 +104,22 @@
                 (bullet/remove! bull))
 
               ;; still alive
-              (do ;(log kill "=" @kill)
-                  (when (not @kill)
-                    (recur
-                     (if (:alive @state-atom)
-                       (boid/seek b (:pos @state-atom))
-                       (boid/wander b 6 3 0.1))
+              (do                       ;(log kill "=" @kill)
+                (when (not @kill)
+                  (recur
+                   (if (:alive @state-atom)
+                     (boid/seek b (:pos @state-atom))
+                     (boid/wander b 6 3 0.1))
 
-                     ))))))))))
+                   ))))))))))
 
 (def levels
   [
-   [1 3 7 9
+   [1 3 5 7 9
     ]
-   [3 5 10 30 50
+   [3 5 10 15 20
     ]
-   [5 9 20 50 70
+   [5 9 20 40 60
     ]
    ])
 
@@ -121,7 +133,7 @@
         (loop [n h]
           (spawn canvas :world state-atom kill)
           (<! (timeout (case level-num 1 1000 2 500 3 100)))
-          (when (and (pos? n) (not @kill))
+          (when (and (> n 1) (not @kill))
             (recur (dec n))))
 
         ;; TODO: wait for no enemies
@@ -139,6 +151,11 @@
       ;; add rune
       (when (not @kill)
         (rune/add-rune! level-num)
+        (swap! moonhenge.game/state #(-> %
+                          (update-in [:max-speed] + 0.025)
+                          (update-in [:thrust] + 0.025)
+                          (update-in [:fire-delay] - 2.5)
+                          (update-in [:bullet-life] + 10)))
         (sound/play-sound (rand-nth [:rune-0 :rune-1 :rune-2 :rune-3 :rune-4])
                           0.5 false)
 
@@ -152,4 +169,7 @@
         (when (pos? n) (recur (dec n))))
 
       (sound/play-sound :moon-rumble-0 0.8 false)
-      (moon/spawn canvas))))
+      (moon/spawn canvas)
+
+      ;(<! (timeout 20000))
+      )))
