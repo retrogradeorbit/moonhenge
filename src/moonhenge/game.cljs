@@ -165,70 +165,72 @@
             (<! (explosion/explosion canvas player)))
 
         ;; next loop
-        (recur
-         (inc frame)
+        (when (:alive @state)
+          (recur
+           (inc frame)
 
-         (cond
-           (left?)
-           (- heading (:rotate-speed @state))
+           (cond
+             (left?)
+             (- heading (:rotate-speed @state))
 
-           (right?)
-           (+ heading (:rotate-speed @state))
+             (right?)
+             (+ heading (:rotate-speed @state))
 
-           :default
-           heading)
+             :default
+             heading)
 
-         (if (and (fire?) (zero? fire-cooldown))
-           (do
-             (case (rune/num)
-               0 (do
-                   (sound/play-sound :shoot-3 0.5 false)
-                   (bullet/spawn canvas :world
-                                 (:pos @state) heading
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state)))
+           (if (and (fire?) (zero? fire-cooldown))
+             (do
+               (case (rune/num)
+                 0 (do
+                     (sound/play-sound :shoot-3 0.5 false)
+                     (bullet/spawn canvas :world
+                                   (:pos @state) heading
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state)))
 
-               1 (do
-                   (sound/play-sound :shoot-3 0.5 false)
-                   (bullet/spawn canvas :world
-                                 (vec2/add (:pos @state)
-                                           (vec2/rotate (vec2/vec2 10 0) heading))
-                                 heading
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state))
-                   (bullet/spawn canvas :world
-                                 (vec2/add (:pos @state)
-                                           (vec2/rotate (vec2/vec2 -10 0) heading))
-                                 heading
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state)))
+                 1 (do
+                     (sound/play-sound :shoot-3 0.5 false)
+                     (bullet/spawn canvas :world
+                                   (vec2/add (:pos @state)
+                                             (vec2/rotate (vec2/vec2 10 0) heading))
+                                   heading
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state))
+                     (bullet/spawn canvas :world
+                                   (vec2/add (:pos @state)
+                                             (vec2/rotate (vec2/vec2 -10 0) heading))
+                                   heading
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state)))
 
-               2 (do
-                   (sound/play-sound :shoot-3 0.5 false)
-                   (bullet/spawn canvas :world
-                                 (:pos @state)
-                                 (- heading 0.05)
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state))
-                   (bullet/spawn canvas :world
-                                 (:pos @state)
-                                 heading
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state))
-                   (bullet/spawn canvas :world
-                                 (:pos @state)
-                                 (+ heading 0.05)
-                                 (:bullet-speed @state)
-                                 (:bullet-life @state)))
+                 2 (do
+                     (sound/play-sound :shoot-3 0.5 false)
+                     (bullet/spawn canvas :world
+                                   (:pos @state)
+                                   (- heading 0.05)
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state))
+                     (bullet/spawn canvas :world
+                                   (:pos @state)
+                                   heading
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state))
+                     (bullet/spawn canvas :world
+                                   (:pos @state)
+                                   (+ heading 0.05)
+                                   (:bullet-speed @state)
+                                   (:bullet-life @state)))
 
-               3 nil)
+                 ;; 3 runes game ends
+                 3 nil)
 
-             (:fire-delay @state))
+               (:fire-delay @state))
 
-           (if (not (fire?))
-             0
-             (max 0 (dec fire-cooldown))))
+             (if (not (fire?))
+               0
+               (max 0 (dec fire-cooldown))))
 
-         )))
+           ))))
 
     ))

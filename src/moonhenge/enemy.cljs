@@ -115,13 +115,9 @@
 
 (def levels
   [
-   [1 3 5 7 9
-    ]
-   [3 5 10 15 20
-    ]
-   [5 9 20 40 60
-    ]
-   ])
+   [1 3 5 7 9 10]
+   [3 5 10 15 15 20 20]
+   [5 9 20 40 40 60 60 100]])
 
 (defn level [canvas state-atom kill]
   (go
@@ -132,7 +128,11 @@
       (loop [[h & t] lh]
         (loop [n h]
           (spawn canvas :world state-atom kill)
-          (<! (timeout (case level-num 1 1000 2 500 3 100)))
+          (let [to (/ (case level-num 1 1000 2 500 3 100) 60)]
+            (loop [c to]
+              (<! (e/next-frame))
+              (when (and (not @kill) (pos? c))
+                (recur (dec c)))))
           (when (and (> n 1) (not @kill))
             (recur (dec n))))
 
@@ -171,5 +171,6 @@
       (sound/play-sound :moon-rumble-0 0.8 false)
       (moon/spawn canvas)
 
-      ;(<! (timeout 20000))
+      (<! (timeout 52000))
+      (swap! moonhenge.game/state assoc :alive false)
       )))
