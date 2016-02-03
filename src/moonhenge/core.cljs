@@ -19,7 +19,7 @@
                    [infinitelives.pixi.macros :as m]))
 
 (defonce canvas
-  (c/init {:layers [:bg :stars :world :runes :moon :player :float :ui] :background 0x000000 :expand true}))
+  (c/init {:layers [:bg :stars :world :runes :moon :player :float :ui] :background 0x000000 :expand true :origins {:runes :bottom}}))
 
 
 (defonce main-thread
