@@ -25,6 +25,16 @@ druids, oh yes.
 
 http://globalgamejam.org/2016/games/moonhenge
 
+## Setup
+
+Install infinitelives.pixi and infinitelives.utils. Then in this directory:
+
+```
+lein figwheel
+```
+
+and point the browser at http://localhost:3449/
+
 ## License
 
 Copyright © 2016 Crispin Wellington & Chris McCormick.
