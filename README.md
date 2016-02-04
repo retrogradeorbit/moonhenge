@@ -6,7 +6,7 @@
 
 Global Game Jam 2016 entry.
 
-Written in 24 hours with ClojureScript using the (https://github.com/infinitelives/infinitelives.pixi InfiniteLives) game jam library.
+Written in 24 hours with ClojureScript using the [InfiniteLives](https://github.com/infinitelives/infinitelives.pixi) game jam library.
 
 ## Instructions
 
