@@ -8,6 +8,7 @@ SFX=$(subst resources/public,build,$(SFX_SOURCE))
 MUSIC_SOURCE=$(wildcard resources/public/music/*.ogg)
 MUSIC=$(subst resources/public,build,$(MUSIC_SOURCE))
 ME=$(shell basename $(shell pwd))
+REPO=git@github.com:retrogradeorbit/moonhenge.git
 
 all: $(APP) $(CSS) $(IDX) $(IMG) $(SFX) $(MUSIC)
 
@@ -40,3 +41,7 @@ clean:
 
 test-server: all
 	cd build && python -m SimpleHTTPServer
+
+setup-build-folder:
+	git clone $(REPO) build/
+	cd build && git checkout gh-pages
