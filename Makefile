@@ -34,17 +34,7 @@ $(MUSIC): $(MUSIC_SOURCE)
 	mkdir -p build/music/
 	cp $? build/music/
 
-resources/public/img/sprites.png: resources/img/sprites.png
-	mkdir -p resources/public/img
-	convert resources/img/sprites.png -alpha On -transparent '#010203' resources/public/img/sprites.png
-
-resources/public/img/sprites-2.png: resources/img/sprites-2.png
-	cp $< $@
-
-images: $(IMG_PUBLIC)
-
 clean:
 	lein clean
 	rm -rf $(CSS) $(APP) $(IDX) $(IMG) $(SFX) $(MUSIC)
 	rm resources/public/img/sprites*.png
-
