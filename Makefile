@@ -1,7 +1,7 @@
 CSS=build/css/style.css
 APP=build/js/compiled/moonhenge.js
 IDX=build/index.html
-IMG=build/img/sprites.png build/img/sprites-2.png
+IMG=build/img/sprites.png
 IMG_PUBLIC=$(subst build,resources/public,$(IMG))
 SFX_SOURCE=$(wildcard resources/public/sfx/*.ogg)
 SFX=$(subst resources/public,build,$(SFX_SOURCE))
@@ -37,4 +37,6 @@ $(MUSIC): $(MUSIC_SOURCE)
 clean:
 	lein clean
 	rm -rf $(CSS) $(APP) $(IDX) $(IMG) $(SFX) $(MUSIC)
-	rm resources/public/img/sprites*.png
+
+test-server: all
+	cd build && python -m SimpleHTTPServer
