@@ -24,7 +24,7 @@
 
 (defonce main-thread
   (go
-    (<! (r/load-resources canvas :ui ["img/sprites.png" "img/sprites-2.png"
+    (<! (r/load-resources canvas :ui ["img/sprites.png"
                                       "sfx/shoot-0.ogg"
                                       "sfx/shoot-1.ogg"
                                       "sfx/shoot-2.ogg"
@@ -57,10 +57,6 @@
     (t/load-sprite-sheet!
      (r/get-texture :sprites :nearest)
      assets/sprites-assets)
-
-    (t/load-sprite-sheet!
-     (r/get-texture :sprites-2 :nearest)
-     assets/sprites-2-assets)
 
     ;; starfield
     (m/with-sprite-set canvas :stars
