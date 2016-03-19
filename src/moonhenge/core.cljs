@@ -21,6 +21,8 @@
 (defonce canvas
   (c/init {:layers [:bg :stars :world :runes :moon :player :float :ui] :background 0x000000 :expand true :origins {:runes :bottom}}))
 
+#_ (defonce fb
+     (c/add-fullscreen-button! canvas))
 
 (defonce main-thread
   (go
