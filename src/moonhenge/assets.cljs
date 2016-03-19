@@ -2,41 +2,38 @@
 
 (def sprites-assets
   {:star-1
-   {:pos [8 8]
+   {:pos [184 8]
     :size [8 8]}
 
    :star-2
-   {:pos [16 8]
+   {:pos [192 8]
     :size [8 8]}
 
    :star-3
-   {:pos [24 8]
+   {:pos [200 8]
     :size [8 8]}
 
    :star-4
-   {:pos [32 8]
+   {:pos [208 8]
     :size [8 8]}
 
    :star-5
-   {:pos [40 8]
+   {:pos [216 8]
     :size [8 8]}
 
    :star-6
-   {:pos [48 8]
+   {:pos [224 8]
     :size [8 8]}
 
    :press-any-key
-   {:pos [32 40]
-    :size [(- 110 32) 10]}
+   {:pos [240 0]
+    :size [79 11]}
 
    :press-any-key-shadow
-   {:pos [32 56]
-    :size [(- 110 32) 10]}
+   {:pos [240 16]
+    :size [79 11]}
 
-   })
-
-(def sprites-2-assets
-  {:ship
+   :ship
    {:pos [160 0]
     :size [16 32]}
 
