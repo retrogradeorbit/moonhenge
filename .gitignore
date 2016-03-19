@@ -15,4 +15,3 @@ pom.xml
 build
 resources/sfx/*.wav
 resources/sfx/jsfxr
-resources/public/img
